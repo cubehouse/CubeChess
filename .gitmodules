@@ -1,0 +1,9 @@
+[submodule "modules/chess.js"]
+	path = modules/chess.js
+	url = https://github.com/mattflaschen/chess.js.git
+[submodule "modules/jquery"]
+	path = modules/jquery
+	url = https://github.com/jquery/jquery.git
+[submodule "modules/requirejs"]
+	path = modules/requirejs
+	url = https://github.com/jrburke/requirejs.git
