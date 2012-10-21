@@ -1,0 +1,33 @@
+.light{
+    background-color:#ffce9e;
+}
+
+.dark{
+	background-color:#d18b47;
+}
+
+.legal{
+	background-color:#33cc66 !important;
+}
+
+.take{
+	background-color:#d92e1f !important;
+}
+
+.hover{
+	background-color:#b85ca1 !important;
+}
+
+.poss{
+	background-color:#69c3ff !important;
+}
+
+.square{
+	width:64px;
+	height:64px;
+}
+
+.board{
+	width:512px;
+	height:512px;
+}

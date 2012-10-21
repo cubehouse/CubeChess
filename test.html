@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		<meta charset="utf-8">
+		<title>CubeChess</title>
+		<meta name="description" content="">
+		<meta name="author" content="">
+
+		<!-- CSS -->
+		<link href="css/style.css" rel="stylesheet">
+        <link href="css/board1.css" rel="stylesheet">
+		
+		<!-- JS -->
+		<script src="requirejs/require.js"></script>
+
+		<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div id='database'></div>
+        <script type='text/javascript'>
+            require({
+                "baseUrl": "./js/"
+            });
+            requirejs(['game'],
+                function(game) {
+                    game.create($("#database"), "1r3kr1/pbpBBp1p/1b3P2/8/8/2P2q2/P4PPP/3R2K1 b - - 0 24");
+                }
+            );
+        </script>
+	</body>
+</html>
+
