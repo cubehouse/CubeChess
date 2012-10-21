@@ -1,4 +1,4 @@
-define(["board", "chess"], function() {
+define(["jquery", "board", "chess"], function() {
     var $t = {};
     
     var Board = require('board');
