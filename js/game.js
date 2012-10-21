@@ -36,6 +36,8 @@ define(["jquery", "board", "chess"], function() {
             // use the chess logic option to update the board
             this.board.move = this.chess.turn();
             
+            this.board.chessjstoposmoves(this.chess);
+            
             // update board layout
             this.board.fen(this.chess.fen());
         },
@@ -140,14 +142,14 @@ define(["jquery", "board", "chess"], function() {
             }
         }
         
+        // push elements to div
+        g.div.html(g.body);
+        
         // push chess logic changes to board
         g.updateBoard();
         
         // draw initial layout
         g.draw();
-        
-        // push elements to div
-        g.div.html(g.body);
         
         // return
         return g;
