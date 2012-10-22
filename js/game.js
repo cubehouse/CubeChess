@@ -87,7 +87,6 @@ define(["jquery", "board", "chess"], function() {
             // flip board function
             list.append(sidebarButton("Flip Board", function() {
                 that.board.flip();
-                that.draw();
             }));
             
             html.append(list);

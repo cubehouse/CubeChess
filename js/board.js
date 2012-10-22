@@ -7,7 +7,7 @@ define(['jquery'], function() {
     $t.fen2pieces = function(fen) {
         var ret = [];
         var a = 0; // keeps track of square ID
-    	for(var i=0; i<fen.length; i++){
+        for(var i=0; i<fen.length; i++){
 			if (fen[i].match(/[A-Z]/i)){
 				// a piece
 				var piece = "";
@@ -57,8 +57,9 @@ define(['jquery'], function() {
     var funcs = {
         // flip board over
         flip: function() {
-            this.flipped = !this.flipped;
-            this.draw();
+            // literally just reverse the list of squares
+            var ul = this.body.find(".board");
+            ul.children().each(function(i,li){ul.prepend(li)})
         },
         // draw board, return HTML of board
         drawHTML: function() {
@@ -73,7 +74,7 @@ define(['jquery'], function() {
                 for(var x=0; x<8; x++){
                     // work out square ID
                     var id;
-                    if ( (this.player==='w') && (!this.flipped) ) {
+                    if ( (this.player==='w') ) {
                         // "forward" board
                         id = ((7-y)*8)+x;
                     } else {
@@ -333,9 +334,8 @@ define(['jquery'], function() {
         // new board object
         var b = {
             move: 'w', // who's move
-            player: 'w', // who is playing? w/b/s (spectator)
+            player: 'b', // who is playing? w/b/s (spectator)
             pos_moves: [],
-            fliped: false, // is board flipped?
             hooks: {}, // store board hooks
             body: $("<div>")
         };
