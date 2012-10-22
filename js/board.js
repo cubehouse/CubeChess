@@ -219,8 +219,10 @@ define(['jquery'], function() {
                     stop: function(e){
                         // remove droppable binds
                         var p_moves = that.pos_moves[$(this).attr("name")];
-                        for(var i=0; i<p_moves.length; i++){
-                            that.body.find("#sq_"+p_moves[i]).droppable("destroy");
+                        if (p_moves) {
+                            for(var i=0; i<p_moves.length; i++){
+                                that.body.find("#sq_"+p_moves[i]).droppable("destroy");
+                            }
                         }
                         
                         that.addHovers();
