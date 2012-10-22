@@ -29,6 +29,9 @@ define(["jquery", "board", "chess"], function() {
             });
             this.drawConsole();
         },
+        makeMove: function(args) {
+            alert(args.from+" --> "+args.to);
+        },
         html: function() {
             return this.body;
         },
@@ -109,7 +112,6 @@ define(["jquery", "board", "chess"], function() {
     $t.create = function(div, fen) {
         var g = {
             div: div,
-            board: Board.create(),
             body: $("<div class='container board1'>"), // game container
             chess: new Chess(fen), // new logic handler
             messages: []
@@ -124,6 +126,9 @@ define(["jquery", "board", "chess"], function() {
         g.body_board = $("<div class='board_frame'>");
         g.body.append(g.body_board);
         
+        // board letters
+        g.body.append("<div></div>");
+        
         // console
         g.console = $('<div id="terminal" class="clear container">');
         g.body.append(g.console);
@@ -132,6 +137,9 @@ define(["jquery", "board", "chess"], function() {
         for(var ii in funcs) {
             g[ii] = funcs[ii];
         }
+        
+        // make board object
+        g.board = Board.create(fen, g.makeMove);
         
         // validate passed fen
         if (fen) {

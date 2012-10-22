@@ -48,6 +48,10 @@ define(['jquery'], function() {
         return;
     };
     
+    $t.IDtosquare = function(id) {
+        return String.fromCharCode( 65 + (id % 8) ) + (Math.floor(id / 8) + 1);
+    };
+    
     $t.pieceHTML = function(piece, square) {
         return "<div id='piece_"+square+"' class='piece "+(piece[0])+"piece' name='"+square+"'>"+
                     "<img id='img_"+square+"' name='"+piece+"' src='images/sets/1/64/"+piece+".png' />"+
@@ -55,6 +59,23 @@ define(['jquery'], function() {
     };
     
     var funcs = {
+        addHook: function(hookname, func) {
+            // setup object if they don't exist yet
+            if (!this.hooks) this.hooks = {};
+            if (!this.hooks[hookname]) this.hooks[hookname] = [];
+            
+            // push function to hooks array
+            return this.hooks[hookname].push(func);
+        },
+        doHook: function(hookname, args) {
+            if (!this.hooks) return;
+            
+            if (!this.hooks[hookname]) return;
+            
+            for(var ii=0; ii<this.hooks[hookname].length; ii++) {
+                this.hooks[hookname][ii](args);
+            }
+        },
         // flip board over
         flip: function() {
             // literally just reverse the list of squares
@@ -323,16 +344,18 @@ define(['jquery'], function() {
             $(".piece").unbind('mouseenter mouseleave').removeClass("legal");
         },
         makeMove: function(from, to) {
+            // TODO - check for promtions etc.
+            
             // change player
             this.move = (this.move == "w")?"b":"w";
             
-            // TODO - execute hooks
-            
-            // redraw board when all callback
+            // send hook actions
+            this.doHook("userMove", {from: $t.IDtosquare(from), to: $t.IDtosquare(to)});
         }
     };
     
-    $t.create = function(fen) {
+    // optionally supply a fen game and a move hook for when a player makes a move
+    $t.create = function(fen, movehook) {
         // new board object
         var b = {
             move: 'w', // who's move
@@ -350,6 +373,10 @@ define(['jquery'], function() {
         // load fen if supplied
         if (fen) {
             b.fen(fen);
+        }
+        
+        if (movehook) {
+            b.addHook("userMove", movehook);
         }
         
         // setup initial board view
