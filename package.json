@@ -1,5 +1,7 @@
 {
     "name": "CubeChess",
     "version": "0.0.1",
-    "dependencies": {}
+    "dependencies": {
+        "everyauth": "0.3.0"
+    }
 }
